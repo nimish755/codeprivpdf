@@ -1,0 +1,60 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/pdf-core",
+    "crates/pdf-merge",
+    "crates/pdf-split",
+    "crates/pdf-compress",
+    "crates/pdf-pages",
+    "crates/pdf-codecs",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+
+
+[workspace.dependencies]
+# WASM bindings
+wasm-bindgen = "0.2"
+js-sys = "0.3"
+web-sys = { version = "0.3", features = [
+    "console",
+    "Window",
+    "Document",
+    "HtmlCanvasElement",
+    "CanvasRenderingContext2d",
+    "ImageData",
+    "Blob",
+    "Url",
+] }
+
+lopdf = { version = "=0.34.0", default-features = false, features = ["nom_parser"] }
+
+image = { version = "0.25", default-features = false, features = ["jpeg", "png"] }
+
+hayro-jpeg2000 = "0.3"
+hayro-jbig2 = "0.1"
+
+oxipng = { version = "10.0.0", default-features = false }
+
+flate2 = "1.0"
+
+serde = { version = "1.0", features = ["derive"] }
+serde-wasm-bindgen = "0.6"
+
+thiserror = "1.0.0"
+
+pdf-core = { path = "crates/pdf-core" }
+pdf-codecs = { path = "crates/pdf-codecs" }
+
+[profile.release]
+lto = true
+opt-level = 's'
+codegen-units = 1
+panic = 'abort'
+strip = true
+
+[profile.release.package."*"]
+opt-level = 's'
