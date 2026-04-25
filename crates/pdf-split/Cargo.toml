@@ -1,0 +1,27 @@
+[package]
+name = "pdf-split"
+version = "0.1.0"
+edition = "2021"
+description = "PDF splitting functionality"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+pdf-core = { path = "../pdf-core" }
+lopdf = { workspace = true }
+wasm-bindgen = { workspace = true }
+js-sys = { workspace = true }
+serde = { workspace = true }
+serde-wasm-bindgen = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"
+pdf-core = { path = "../pdf-core", features = ["testutils"] }
+
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false
+
+[package.metadata.wasm-pack.profile.dev]
+wasm-opt = false

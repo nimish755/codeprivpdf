@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRivpdf - Privacy-First PDF Tools</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="images/site.webmanifest">
+    <meta name="description" content="Free, privacy-first PDF tools. Merge, split, compress, and manipulate PDFs entirely in your browser. No uploads, no servers, complete privacy.">
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- TODO SHIT: No emoji get icons(LATER ig) also why comment on html lol del most of em ig -->
+        <header class="header">
+            <div class="container header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"></div>
+                    <span>PRivpdf</span>
+                </a>
+                <nav class="nav">
+                    <a href="merge.html" class="nav-link">Merge</a>
+                    <a href="split.html" class="nav-link">Split</a>
+                    <a href="compress.html" class="nav-link">Compress</a>
+                    <a href="pages.html" class="nav-link">Pages</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ContentOO -->
+        <main>
+            <div class="container">
+                <!-- Hero or smth -->
+                <section class="hero">
+                    <h1>Privacy-First PDF Tools</h1>
+                    <p>
+                        Merge, split, compress, and manipulate your PDFs entirely in your browser. 
+                        Your files never leave your device.
+                    </p>
+                    <div class="privacy-badge">
+                        🔒 100% Client-Side • Zero Uploads • Complete Privacy
+                    </div>
+                </section>
+
+                <!-- Features? Need to add more also change emoji to actual icons later lol -->
+                <section class="features-grid">
+                    <a href="merge.html" class="feature-card">
+                        <div class="feature-icon">📑</div>
+                        <h3>Merge PDF</h3>
+                        <p>Combine multiple PDF files into a single document. Drag to reorder pages.</p>
+                    </a>
+
+                    <a href="split.html" class="feature-card">
+                        <div class="feature-icon">✂️</div>
+                        <h3>Split PDF</h3>
+                        <p>Split a PDF into multiple files by page ranges or extract individual pages.</p>
+                    </a>
+
+                    <a href="compress.html" class="feature-card">
+                        <div class="feature-icon">📦</div>
+                        <h3>Compress PDF</h3>
+                        <p>Reduce file size by optimizing images. Choose quality or target size.</p>
+                    </a>
+
+                    <a href="pages.html" class="feature-card">
+                        <div class="feature-icon">📋</div>
+                        <h3>Remove/Extract Pages</h3>
+                        <p>Remove unwanted pages or extract specific pages into a new PDF.</p>
+                    </a>
+                </section>
+
+                <!-- How It is supposed to Work(wjen fix the broken as hell code) -->
+                <section class="tool-container mt-4">
+                    <h2 class="text-center mb-3">How It Works</h2>
+                    <div class="features-grid">
+                        <div class="feature-card" style="cursor: default;">
+                            <div class="feature-icon">🌐</div>
+                            <h3>Browser-Based</h3>
+                            <p>All processing happens in your browser using WebAssembly technology.</p>
+                        </div>
+                        <div class="feature-card" style="cursor: default;">
+                            <div class="feature-icon">🔐</div>
+                            <h3>Zero Knowledge</h3>
+                            <p>We never see your files. No data is ever uploaded to any server.</p>
+                        </div>
+                        <div class="feature-card" style="cursor: default;">
+                            <div class="feature-icon">⚡</div>
+                            <h3>Fast & Efficient</h3>
+                            <p>Rust-powered WASM delivers near-native performance in your browser.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Foot 🦶 -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-links">
+                    <a href="#">GitHub</a>
+                </div>
+                <p>Built with Rust + WebAssembly • All processing happens in your browser</p>
+            </div>
+        </footer>
+    </div>
+
+    <!--  Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/js/sw.js')
+                .then(reg => console.log('Service Worker registered'))
+                .catch(err => console.warn('Service Worker registration failed:', err));
+        }
+    </script>
+</body>
+</html>

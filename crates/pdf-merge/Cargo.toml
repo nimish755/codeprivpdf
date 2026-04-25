@@ -1,0 +1,24 @@
+[package]
+name = "pdf-merge"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "MERGEEEEEE"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+wasm-bindgen = { workspace = true }
+js-sys = { workspace = true }
+lopdf = { workspace = true }
+pdf-core = { workspace = true }
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"
+
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false
+
+[package.metadata.wasm-pack.profile.dev]
+wasm-opt = false

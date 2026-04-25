@@ -1,0 +1,34 @@
+[package]
+name = "pdf-codecs"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Image codec support for PDF manipulation "
+
+[lib]
+crate-type = ["rlib"]
+
+[dependencies]
+image = { workspace = true }
+pdf-core = { workspace = true }
+flate2 = { workspace = true }
+
+[dependencies.hayro-jpeg2000]
+version = "0.3"
+optional = true
+
+[dependencies.hayro-jbig2]
+version = "0.1"
+optional = true
+
+[features]
+default = []
+jpeg2000 = ["hayro-jpeg2000"]
+jbig2 = ["hayro-jbig2"]
+all-codecs = ["jpeg2000", "jbig2"]
+
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false
+
+[package.metadata.wasm-pack.profile.dev]
+wasm-opt = false

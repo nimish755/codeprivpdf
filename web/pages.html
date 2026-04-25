@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove/Extract pages - PRivpdf</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="images/site.webmanifest">
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Copy pasta -->
+        <header class="header">
+            <div class="container header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"></div>
+                    <span>PRivpdf</span>
+                </a>
+                <nav class="nav">
+                    <a href="merge.html" class="nav-link">Merge</a>
+                    <a href="split.html" class="nav-link">Split</a>
+                    <a href="compress.html" class="nav-link">Compress</a>
+                    <a href="pages.html" class="nav-link active">Pages</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <div class="container">
+                <div class="tool-header">
+                    <h1>Remove or Extract Pages</h1>
+                    <p>Select pages to remove from your PDF or extract into a new document.</p>
+                </div>
+
+                <div class="tool-container">
+                    <div class="drop-zone" id="dropZone">
+                        <div class="drop-zone-icon">📋</div>
+                        <h3>Drag & drop a PDF file here</h3>
+                        <p>or click to select a file</p>
+                        <input type="file" id="fileInput" accept=".pdf">
+                    </div>
+
+                    <!-- File Informatione idk how u do the weird accent e but read it like french -->
+                    <div class="file-list" id="fileInfo" style="display: none;">
+                        <div class="file-item">
+                            <div class="file-icon">📄</div>
+                            <div class="file-info">
+                                <div class="file-name" id="fileName">document.pdf</div>
+                                <div class="file-size" id="fileSize">0 KB • 0 pages</div>
+                            </div>
+                            <button class="file-remove" id="removeFile" title="Remove">✕</button>
+                        </div>
+                    </div>
+
+                    <div class="options-panel" id="optionsPanel" style="display: none;">
+                        <h4 class="options-title">Mode</h4>
+                        
+                        <div class="option-group">
+                            <select id="pageMode">
+                                <option value="remove">Remove selected pages</option>
+                                <option value="extract">Extract selected pages</option>
+                            </select>
+                            <p class="option-description" id="modeDescription">
+                                Selected pages will be removed from the PDF.
+                            </p>
+                        </div>
+
+                        <div class="option-group">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span class="option-label">Select Pages</span>
+                                <div>
+                                    <button class="btn btn-secondary" id="selectAllBtn" style="padding: 4px 12px; font-size: 0.875rem;">Select All</button>
+                                    <button class="btn btn-secondary" id="selectNoneBtn" style="padding: 4px 12px; font-size: 0.875rem;">Select None</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="thumbnails-grid" id="thumbnailsGrid"></div>
+
+                    <div class="progress-container" id="progressContainer">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <p class="progress-text" id="progressText">Processing...</p>
+                    </div>
+
+                    <div class="action-buttons" id="actionButtons" style="display: none;">
+                        <button class="btn btn-secondary" id="clearBtn">Clear</button>
+                        <button class="btn btn-primary btn-lg" id="processBtn">
+                            Process PDF
+                        </button>
+                    </div>
+
+                    <div class="results-section" id="resultsSection">
+                        <div class="results-icon">✓</div>
+                        <h2 id="resultTitle">Processing Complete!</h2>
+                        <div class="results-stats">
+                            <div class="stat">
+                                <div class="stat-value" id="resultOriginalPages">0</div>
+                                <div class="stat-label">Original Pages</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value" id="resultNewPages">0</div>
+                                <div class="stat-label">New Pages</div>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary" id="startOverBtn">Start Over</button>
+                            <button class="btn btn-primary btn-lg" id="downloadBtn">
+                                Download PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p>🔒 Your files never leave your browser • Built with Rust + WebAssembly</p>
+            </div>
+        </footer>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p class="mt-2">Loading PDF tools...</p>
+        </div>
+    </div>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/js/sw.js')
+                .catch(err => console.warn('SW registration failed:', err));
+        }
+    </script>
+    <script type="module" src="js/pages.js"></script>
+</body>
+</html>

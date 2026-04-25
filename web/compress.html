@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compress PDF - CodePRivpdf</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="images/site.webmanifest">
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="header">
+            <div class="container header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"></div>
+                    <span>CodePRivpdf</span>
+                </a>
+                <nav class="nav">
+                    <a href="merge.html" class="nav-link">Merge</a>
+                    <a href="split.html" class="nav-link">Split</a>
+                    <a href="compress.html" class="nav-link active">Compress</a>
+                    <a href="pages.html" class="nav-link">Pages</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <div class="container">
+                <div class="tool-header">
+                    <h1>Compress PDF</h1>
+                    <p>Reduce file size by optimizing images. Choose quality level or target size.</p>
+                </div>
+
+                <div class="tool-container">
+                    <div class="drop-zone" id="dropZone">
+                        <div class="drop-zone-icon">📦</div>
+                        <h3>Drag & drop a PDF file here</h3>
+                        <p>or click to select a file</p>
+                        <input type="file" id="fileInput" accept=".pdf">
+                    </div>
+
+                    <div class="file-list" id="fileInfo" style="display: none;">
+                        <div class="file-item">
+                            <div class="file-icon">📄</div>
+                            <div class="file-info">
+                                <div class="file-name" id="fileName">document.pdf</div>
+                                <div class="file-size" id="fileSize">0 KB</div>
+                            </div>
+                            <button class="file-remove" id="removeFile" title="Remove">✕</button>
+                        </div>
+                    </div>
+
+                    <div class="options-panel" id="optionsPanel" style="display: none;">
+                        <h4 class="options-title">Compression Options</h4>
+                        
+                        <div class="option-group">
+                            <label class="option-label">Compression Mode</label>
+                            <select id="compressionMode">
+                                <option value="quality">Quality Level</option>
+                                <option value="target">Target File Size</option>
+                                <option value="lossless">Lossless (No quality loss)</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group" id="qualityOption">
+                            <label class="option-label">
+                                Quality: <span id="qualityValue">75</span>%
+                            </label>
+                            <input type="range" id="qualitySlider" min="10" max="100" value="75">
+                            <p class="option-description">Lower quality = smaller file size</p>
+                        </div>
+
+                        <div class="option-group" id="targetOption" style="display: none;">
+                            <label class="option-label">Target Size (KB)</label>
+                            <input type="number" id="targetSize" min="10" value="500">
+                            <p class="option-description">The output may be larger if the target cannot be achieved</p>
+                        </div>
+
+                        <!-- Lossless Info (shown when "lossless" mode) -->
+                        <div class="option-group" id="losslessOption" style="display: none;">
+                            <p class="option-description">
+                                Lossless compression removes metadata and thumbnails without affecting 
+                                image quality. Results vary depending on the original PDF.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="progress-container" id="progressContainer">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <p class="progress-text" id="progressText">Processing...</p>
+                    </div>
+
+                    <div class="action-buttons" id="actionButtons" style="display: none;">
+                        <button class="btn btn-secondary" id="clearBtn">Clear</button>
+                        <button class="btn btn-primary btn-lg" id="compressBtn">
+                            Compress PDF
+                        </button>
+                    </div>
+
+                    <div class="results-section" id="resultsSection">
+                        <div class="results-icon">✓</div>
+                        <h2>Compression Complete!</h2>
+                        <div class="results-stats">
+                            <div class="stat">
+                                <div class="stat-value" id="originalSize">0 KB</div>
+                                <div class="stat-label">Original Size</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value" id="compressedSize">0 KB</div>
+                                <div class="stat-label">New Size</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value" id="reduction">0%</div>
+                                <div class="stat-label">Reduction</div>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary" id="startOverBtn">Start Over</button>
+                            <button class="btn btn-primary btn-lg" id="downloadBtn">
+                                Download Compressed PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p>🔒 Your files never leave your browser • Built with Rust + WebAssembly</p>
+            </div>
+        </footer>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p class="mt-2">Loading PDF tools...</p>
+        </div>
+    </div>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/js/sw.js')
+                .catch(err => console.warn('SW registration failed:', err));
+        }
+    </script>
+    <script type="module" src="js/compress.js"></script>
+</body>
+</html>

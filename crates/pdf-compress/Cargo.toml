@@ -1,0 +1,29 @@
+[package]
+name = "pdf-compress"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Compress PDF documents with image recompression"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+wasm-bindgen = { workspace = true }
+js-sys = { workspace = true }
+serde = { workspace = true }
+serde-wasm-bindgen = { workspace = true }
+lopdf = { workspace = true }
+image = { workspace = true }
+flate2 = { workspace = true }
+pdf-core = { workspace = true }
+pdf-codecs = { workspace = true }
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"
+
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false
+
+[package.metadata.wasm-pack.profile.dev]
+wasm-opt = false

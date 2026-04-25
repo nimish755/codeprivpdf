@@ -1,0 +1,24 @@
+[package]
+name = "pdf-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Shared types and utilities for CodePRivpdf"
+
+[lib]
+crate-type = ["rlib"]
+
+[features]
+default = []
+testutils = []
+
+[dependencies]
+lopdf = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false
+
+[package.metadata.wasm-pack.profile.dev]
+wasm-opt = false

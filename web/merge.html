@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merge PDF - PRivpdf</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="images/site.webmanifest">
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="header">
+            <div class="container header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"></div>
+                    <span>PRivpdf</span>
+                </a>
+                <nav class="nav">
+                    <a href="merge.html" class="nav-link active">Merge</a>
+                    <a href="split.html" class="nav-link">Split</a>
+                    <a href="compress.html" class="nav-link">Compress</a>
+                    <a href="pages.html" class="nav-link">Pages</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <div class="container">
+                <div class="tool-header">
+                    <h1>Merge PDF Files</h1>
+                    <p>Combine multiple PDF documents into a single file. Drag to reorder.</p>
+                </div>
+
+                <div class="tool-container">
+                    <div class="drop-zone" id="dropZone">
+                        <div class="drop-zone-icon">📑</div>
+                        <h3>Drag & drop PDF files here</h3>
+                        <p>or click to select files</p>
+                        <input type="file" id="fileInput" accept=".pdf" multiple>
+                    </div>
+
+                    <div class="file-list" id="fileList"></div>
+
+                    <div class="add-more-container" id="addMoreContainer" style="display: none;">
+                        <button class="btn btn-secondary" id="addMoreBtn">
+                            + Add More PDFs
+                        </button>
+                        <input type="file" id="addMoreInput" accept=".pdf" multiple style="display: none;">
+                    </div>
+
+                    <div class="progress-container" id="progressContainer">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <p class="progress-text" id="progressText">Processing...</p>
+                    </div>
+
+                    <div class="action-buttons" id="actionButtons" style="display: none;">
+                        <button class="btn btn-secondary" id="clearBtn">Clear All</button>
+                        <button class="btn btn-primary btn-lg" id="mergeBtn">
+                            Merge PDFs
+                        </button>
+                    </div>
+
+                    <div class="results-section" id="resultsSection">
+                        <div class="results-icon">✓</div>
+                        <h2>Merge Complete!</h2>
+                        <div class="results-stats">
+                            <div class="stat">
+                                <div class="stat-value" id="resultPages">0</div>
+                                <div class="stat-label">Total Pages</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value" id="resultSize">0 KB</div>
+                                <div class="stat-label">File Size</div>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary" id="startOverBtn">Start Over</button>
+                            <button class="btn btn-primary btn-lg" id="downloadBtn">
+                                Download Merged PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p>🔒 Your files never leave your browser • Built with Rust + WebAssembly</p>
+            </div>
+        </footer>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p class="mt-2">Loading PDF tools...</p>
+        </div>
+    </div>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/js/sw.js')
+                .catch(err => console.warn('SW registration failed:', err));
+        }
+    </script>
+    <script type="module" src="js/merge.js"></script>
+</body>
+</html>
